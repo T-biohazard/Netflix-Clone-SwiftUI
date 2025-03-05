@@ -57,10 +57,10 @@ struct CategoryBarView: View {
                         Image(systemName: "chevron.down")
                             .foregroundColor(.gray)
                     }
-                    .padding(.horizontal, 10)
-                    .padding(.vertical, 5)
-                    .background(isCategoryExpanded ? Color.red.opacity(0.3) : Color.clear)
-                    .cornerRadius(10)
+//                    .padding(.horizontal, 10)
+//                    .padding(.vertical, 5)
+//                    .background(isCategoryExpanded ? Color.red.opacity(0.3) : Color.clear)
+//                    .cornerRadius(10)
                 }
             }
             .frame(maxWidth: .infinity)
@@ -76,7 +76,7 @@ struct CategoryBarView: View {
     private func categorySelectionView() -> some View {
         ZStack {
             /// Blurry Background
-            Color.black.opacity(0.5)
+            Color.black.opacity(0.4)
                 .ignoresSafeArea()
                 .background(
                     VisualEffectView(effect: UIBlurEffect(style: .dark))
@@ -101,8 +101,8 @@ struct CategoryBarView: View {
                                     .foregroundColor(.white)
                                     .frame(maxWidth: .infinity)
                                     .padding()
-                                    .background(Color.gray.opacity(0.2))
-                                    .cornerRadius(10)
+//                                    .background(Color.gray.opacity(0.2))
+//                                    .cornerRadius(10)
                             }
                         }
                     }
@@ -123,7 +123,7 @@ struct CategoryBarView: View {
                 .padding(.top, 20)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color.black.opacity(0.8))
+            .background(Color.black.opacity(0.2))
             .cornerRadius(20)
             .padding(30)
         }

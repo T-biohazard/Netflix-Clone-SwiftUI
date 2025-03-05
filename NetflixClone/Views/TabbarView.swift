@@ -49,12 +49,27 @@ struct TabBarView: View {
                 }
                 .tag(2)
 
+            
             Text("Downloads")
                 .tabItem {
                     Image(systemName: "arrow.down.to.line.alt")
                     Text("Downloads")
                 }
                 .tag(3)
+            
+            
+            NavigationView {
+                VStack {
+                   
+                    ProfileView()
+                }
+            }
+                .tabItem {
+                    Image(systemName: "person.fill")
+                    Text("My Profile")
+                }
+                .tag(4)
+
         }
         .accentColor(.red)
         .background(BlurView(style: .systemUltraThinMaterialDark)) // Blurred Background
