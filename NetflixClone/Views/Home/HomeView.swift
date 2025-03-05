@@ -13,6 +13,10 @@ struct HomeView: View {
     @State private var selectedCategory = "Trending"
     @State private var scrollOffset: CGFloat = 0
 
+    
+    @State private var showActionSheet = false
+
+    
     var body: some View {
         NavigationView {
             ZStack(alignment: .top) {
@@ -81,6 +85,9 @@ struct HomeView: View {
                 viewModel.filterMovies(by: newValue)
             }
             .ignoresSafeArea(.all, edges: .top)
+            .overlay(
+                           HomeActionSheetView(show: $showActionSheet) //  Calling the pop-up
+                       )
         }
     }
 
@@ -150,20 +157,24 @@ struct HomeView: View {
         MovieSectionView(title: "Search Results for '\(searchText)'", movies: viewModel.searchResults)
     }
 
-    /// Play Button
-    private func playButton() -> some View {
-        Button(action: {}) {
-            HStack {
-                Image(systemName: "play.fill")
-                Text("Play")
+    /// Play Button (Triggers Pop-Up)
+        private func playButton() -> some View {
+            Button(action: {
+                withAnimation {
+                    showActionSheet.toggle() // ✅ Show the pop-up when Play is tapped
+                }
+            }) {
+                HStack {
+                    Image(systemName: "play.fill")
+                    Text("Play")
+                }
+                .foregroundColor(.white)
+                .padding()
+                .background(Color.red)
+                .clipShape(RoundedRectangle(cornerRadius: 10))
+                .shadow(radius: 10)
             }
-            .foregroundColor(.white)
-            .padding()
-            .background(Color.red)
-            .clipShape(RoundedRectangle(cornerRadius: 10))
-            .shadow(radius: 10)
         }
-    }
 
     /// My List Button
     private func myListButton() -> some View {

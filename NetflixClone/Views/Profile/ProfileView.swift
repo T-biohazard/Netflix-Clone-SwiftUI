@@ -1,9 +1,7 @@
-////  ProfileView.swift
-////  NetflixClone
-////
-////  Created by Tahsin on 2/26/25.
-////
-////
+////////  ProfileView.swift
+////////  NetflixClone
+////////
+////////  Created by Tahsin on 2/26/25.
 
 
 import SwiftUI
@@ -14,41 +12,77 @@ struct ProfileView: View {
     var body: some View {
         NavigationView {
             ScrollView {
-                VStack(spacing: 10) {
-                    // Profile Section
-                    VStack {
-                        Image(systemName: "person.fill")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 80, height: 80)
-                            .foregroundColor(.white)
-                            .clipShape(Circle())
-                            .padding(.top, 20)
-                        
-                        Text("Tahsin Bro")
-                            .font(.title3)
-                            .fontWeight(.bold)
-                            .foregroundColor(.white)
-                        
-                        Text("Account Status: Active")
-                            .font(.subheadline)
-                            .foregroundColor(.gray)
-                    }
-                    .padding(.bottom, 10)
+                VStack(spacing: 15) {
                     
-                    // Action Buttons
+                    // **Profile Section with Background**
+                    VStack(alignment: .leading) {
+                        HStack {
+                            // **Profile Image**
+                            Image("profile_picture") //  Replace with actual profile image
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 50, height: 50) //  Adjusted size
+                                .clipShape(Circle()) //  Rounded Profile Picture
+                                .overlay(Circle().stroke(Color.white, lineWidth: 1)) // Thin white border
+                            
+                            VStack(alignment: .leading, spacing: 2) {
+                                Text("Tahsin Bro") //  User Name
+                                    .font(.headline)
+                                    .foregroundColor(.white)
+                                
+                                HStack(spacing: 4) {
+                                    Text("Active") //  Active status
+                                        .foregroundColor(.green)
+                                        .font(.subheadline)
+                                    
+                                    Text("• Expired on 12th Jan 2025") //  Expiration Date
+                                        .foregroundColor(.gray)
+                                        .font(.subheadline)
+                                }
+                            }
+                            
+                            Spacer()
+                        }
+                        .padding(.horizontal, 16)
+                        .padding(.top, 10)
+                        
+                        // **View Profile Button**
+                        Button(action: {
+                            print("View Profile tapped")
+                        }) {
+                            HStack {
+                                Text("View profile")
+                                    .foregroundColor(.white)
+                                    .font(.subheadline)
+                                Image(systemName: "arrow.right")
+                                    .foregroundColor(.white)
+                            }
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 8)
+                            .background(Color.gray.opacity(0.2))
+                            .cornerRadius(8)
+                        }
+                        .padding(.horizontal, 16)
+                        .padding(.top, 8)
+                    }
+                    .background(Color.gray.opacity(0.2)) //  Matches the card background in the image
+                    .cornerRadius(10)
+                    .padding(.horizontal, 16)
+                    .padding(.top, 10)
+                    
+                    // **Action Buttons**
                     VStack(spacing: 10) {
                         ProfileButton(title: "Redeem a voucher")
                         ProfileButton(title: "Buy a pack")
                     }
-                    .padding(.horizontal)
+                    .padding(.horizontal, 16)
                     
-                    // My Content Section
-                    VStack(alignment: .leading) {
+                    // **My Content Section**
+                    VStack(alignment: .leading, spacing: 10) {
                         Text("My Content")
                             .font(.headline)
                             .foregroundColor(.white)
-                            .padding(.leading, 20)
+                            .padding(.horizontal, 16)
                         
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack(spacing: 10) {
@@ -56,155 +90,77 @@ struct ProfileView: View {
                                 MovieThumbnail()
                                 MovieThumbnail()
                             }
-                            .padding(.horizontal)
+                            .padding(.horizontal, 16)
                         }
                     }
+                    .padding(.top, 5)
                     
-                    // Settings and Logout Buttons
+                    // **Settings and Logout Buttons**
                     VStack(spacing: 10) {
-                        ProfileButton(title: "Settings")
-                        ProfileButton(title: "Trams & Condition")
-                        ProfileButton(title: "Logout")
+                        NavigationLink(destination: SettingsView()) {
+                            HStack {
+                                Image(systemName: "gearshape.fill")
+                                    .foregroundColor(.white)
+                                    .imageScale(.medium)
+                                Text("Settings")
+                                    .foregroundColor(.white)
+                                    .font(.headline)
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.gray)
+                            }
+                            .padding()
+                            .background(Color.gray.opacity(0.2))
+                            .cornerRadius(10)
+                        }
+
+                        
+                        
+
+                        ProfileButtonWithIcon(title: "Trams & Condition", icon: "doc.text.fill")
+                        ProfileButtonWithIcon(title: "Logout", icon: "power")
                     }
-                    .padding(.horizontal)
+                    .padding(.horizontal, 16)
                     
                     Spacer()
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-                       .background(Color.black.ignoresSafeArea())
-                       .navigationBarTitleDisplayMode(.inline) // Keeps title layout inline
-                       .toolbar {
-                           ToolbarItem(placement: .navigationBarLeading) {
-                               Text("My Binge") // ✅ Left-aligned title
-                                   .font(.headline)
-                                   .foregroundColor(.white)
-                           }
-                           
-                           ToolbarItemGroup(placement: .navigationBarTrailing) {
-                               NavigationLink(destination: SearchView()) { // ✅ Search Button
-                                   Image(systemName: "magnifyingglass")
-                                       .foregroundColor(.white)
-                                       .imageScale(.large)
-                               }
-                               
-                               Button(action: {
-                                   withAnimation {
-                                       showActionSheet.toggle()
-                                   }
-                               }) { // ✅ Menu Button
-                                   Image(systemName: "line.3.horizontal")
-                                       .foregroundColor(.white)
-                                       .imageScale(.large)
-                               }
-                           }
-                       }
-                       .overlay(
-                           CustomActionSheet(show: $showActionSheet)
-                       )
-                   }
-               }
-           }
-
-// MARK: - Custom Action Sheet (Half Screen)
-struct CustomActionSheet: View {
-    @Binding var show: Bool
-    @State private var rememberMe = false
-    
-    var body: some View {
-        ZStack {
-            if show {
-                // Background Overlay
-                Color.black.opacity(0.5)
-                    .edgesIgnoringSafeArea(.all)
-                    .onTapGesture {
-                        withAnimation {
-                            show = false
-                        }
-                    }
+            .background(Color.black.ignoresSafeArea())
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Text("My Binge")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                }
                 
-                VStack {
-                    Spacer() // Pushes the sheet to the bottom
-                    
-                    VStack {
-                        // Close Button (X at the top-right)
-                        HStack {
-                            Spacer()
-                            Button(action: {
-                                withAnimation {
-                                    show = false
-                                }
-                            }) {
-                                Image(systemName: "xmark.circle.fill")
-                                    .foregroundColor(.gray)
-                                    .imageScale(.large)
-                            }
-                            .padding()
-                        }
-                        
-                        // Action Sheet Options
-                        VStack(spacing: 15) {
-                            ActionSheetItem(title: "Manage Profile", icon: "pencil")
-                            ActionSheetItem(title: "Account Expired", icon: "exclamationmark.triangle")
-                            ActionSheetItem(title: "My List", icon: "list.bullet")
-                        }
-                        .padding(.top, -10)
-                        
-                        // Toggle (Remember Me)
-                        Toggle(isOn: $rememberMe) {
-                            Text("Remember Me")
-                                .foregroundColor(.white)
-                        }
-                        .toggleStyle(SwitchToggleStyle(tint: .red))
-                        .padding(.horizontal, 20)
-                        .padding(.top, 15)
-                        
-                        Spacer()
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    NavigationLink(destination: SearchView()) {
+                        Image(systemName: "magnifyingglass")
+                            .foregroundColor(.white)
+                            .imageScale(.large)
                     }
-                    .frame(maxWidth: .infinity)
-                    .frame(height: UIScreen.main.bounds.height * 0.4) // Half of the screen height
-                    .background(Color.black)
-                    .cornerRadius(20)
-                    .padding(.horizontal, 16)
-                    .padding(.bottom, 20)
-                    .transition(.move(edge: .bottom))
+                    
+                    Button(action: {
+                        withAnimation {
+                            showActionSheet.toggle()
+                        }
+                    }) {
+                        Image(systemName: "line.3.horizontal")
+                            .foregroundColor(.white)
+                            .imageScale(.large)
+                    }
                 }
             }
+            .overlay(
+                ProfileActionSheetView(show: $showActionSheet) //  Now calling the separate file
+            )
         }
     }
 }
 
-// MARK: - Action Sheet Item
-struct ActionSheetItem: View {
-    let title: String
-    let icon: String
-    
-    var body: some View {
-        Button(action: {
-            print("\(title) tapped")
-        }) {
-            HStack {
-                Image(systemName: icon)
-                    .foregroundColor(.white)
-                    .imageScale(.large)
-                    .frame(width: 25, alignment: .leading) // Ensures proper alignment
-                
-                Text(title)
-                    .foregroundColor(.white)
-                    .font(.headline)
-                
-                Spacer()
-            }
-            .padding()
-            .frame(maxWidth: .infinity)
-            .background(Color.gray.opacity(0.2))
-            .cornerRadius(10)
-            .padding(.horizontal, 20)
-        }
-    }
-}
-
-// MARK: - Reusable Components
+// MARK: - Profile Button (Without Icon)
 struct ProfileButton: View {
     let title: String
     
@@ -225,6 +181,32 @@ struct ProfileButton: View {
     }
 }
 
+// MARK: - Profile Button (With Icon)
+struct ProfileButtonWithIcon: View {
+    let title: String
+    let icon: String
+    
+    var body: some View {
+        Button(action: {}) {
+            HStack {
+                Image(systemName: icon)
+                    .foregroundColor(.white)
+                    .imageScale(.medium)
+                Text(title)
+                    .foregroundColor(.white)
+                    .font(.headline)
+                Spacer()
+                Image(systemName: "chevron.right")
+                    .foregroundColor(.gray)
+            }
+            .padding()
+            .background(Color.gray.opacity(0.2))
+            .cornerRadius(10)
+        }
+    }
+}
+
+// MARK: - Movie Thumbnail (For My Content Section)
 struct MovieThumbnail: View {
     var body: some View {
         Rectangle()
