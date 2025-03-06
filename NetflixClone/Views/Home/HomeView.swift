@@ -149,7 +149,8 @@ struct HomeView: View {
         MovieSectionView(title: "All Time Best Movies", movies: viewModel.allTimeBestMovies)
             .padding(.bottom)
         MovieSectionView(title: "Upcoming Movies", movies: viewModel.upcomingMovies)
-            .padding(.bottom)
+        //----here i have added padding else will go under tabbar !--------
+            .padding(.bottom,40)
     }
 
     /// Search Results
@@ -162,7 +163,7 @@ struct HomeView: View {
         private func playButton() -> some View {
             Button(action: {
                 withAnimation {
-                    showActionSheet.toggle() // ✅ Show the pop-up when Play is tapped
+                    showActionSheet.toggle() //  Show the pop-up when Play is tapped
                 }
             }) {
                 HStack {

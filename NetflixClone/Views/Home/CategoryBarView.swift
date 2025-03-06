@@ -290,7 +290,7 @@ struct CategoryBarView: View {
             .padding(.vertical, 10)
         }
         .fullScreenCover(isPresented: $isCategoryExpanded) {
-            categorySelectionView() // ✅ Uses the modified function below
+            categorySelectionView() //  Uses the modified function below
         }
     }
     
@@ -305,10 +305,10 @@ struct CategoryBarView: View {
                         .resizable()
                         .scaledToFill()
                         .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-                        .blur(radius: 90) // ✅ Blurred Background
+                        .blur(radius: 90) //  Blurred Background
                         .ignoresSafeArea()
                 } placeholder: {
-                    Color.black.opacity(0.85).ignoresSafeArea()
+                    Color.black.opacity(0.70).ignoresSafeArea()
                 }
             }
 

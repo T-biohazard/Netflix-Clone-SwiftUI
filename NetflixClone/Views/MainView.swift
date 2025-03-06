@@ -1,6 +1,6 @@
 //
 //  MainView.swift
-//  NetflixClone
+//  
 //
 //  Created by Tahsin on 2/9/25.
 //

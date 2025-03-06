@@ -142,7 +142,7 @@ struct ToggleRow: View {
     }
 }
 
-// MARK: - **Preview**
+// MARK: - Preview
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         SettingsView()

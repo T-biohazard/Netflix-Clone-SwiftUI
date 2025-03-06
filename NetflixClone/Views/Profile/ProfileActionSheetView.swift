@@ -4,113 +4,6 @@
 ////
 ////  Created by Tahsin on 3/5/25.
 ////
-//
-//import SwiftUI
-//
-//struct ProfileActionSheetView: View {
-//    @Binding var show: Bool
-//    @State private var rememberMe = false
-//    
-//    var body: some View {
-//        ZStack {
-//            if show {
-//                // Background Overlay
-//                Color.black.opacity(0.5)
-//                    .edgesIgnoringSafeArea(.all)
-//                    .onTapGesture {
-//                        withAnimation {
-//                            show = false
-//                        }
-//                    }
-//                
-//                VStack {
-//                    Spacer() // Pushes the sheet to the bottom
-//                    
-//                    VStack {
-//                        // Close Button (X at the top-right)
-//                        HStack {
-//                            Spacer()
-//                            Button(action: {
-//                                withAnimation {
-//                                    show = false
-//                                }
-//                            }) {
-//                                Image(systemName: "xmark.circle.fill")
-//                                    .foregroundColor(.gray)
-//                                    .imageScale(.large)
-//                            }
-//                            .padding()
-//                        }
-//                        
-//                        // Action Sheet Options
-//                        VStack(spacing: 15) {
-//                            ProfileActionSheetItem(title: "Manage Profile", icon: "pencil")
-//                            ProfileActionSheetItem(title: "Account Expired", icon: "exclamationmark.triangle")
-//                            ProfileActionSheetItem(title: "My List", icon: "list.bullet")
-//                        }
-//                        .padding(.top, -10)
-//                        
-//                        // Toggle (Remember Me)
-//                        Toggle(isOn: $rememberMe) {
-//                            Text("Remember Me")
-//                                .foregroundColor(.white)
-//                        }
-//                        .toggleStyle(SwitchToggleStyle(tint: .red))
-//                        .padding(.horizontal, 20)
-//                        .padding(.top, 15)
-//                        
-//                        Spacer()
-//                    }
-//                    .frame(maxWidth: .infinity)
-//                    .frame(height: UIScreen.main.bounds.height * 0.4) // Half of the screen height
-//                    .background(Color.black)
-//                    .cornerRadius(5)
-////                    .padding(.horizontal, 16)
-//                    .padding(.bottom, 20)
-//                    .transition(.move(edge: .bottom))
-//                }
-//            }
-//        }
-//    }
-//}
-//
-//// MARK: - Action Sheet Item
-//struct ProfileActionSheetItem: View {
-//    let title: String
-//    let icon: String
-//    
-//    var body: some View {
-//        Button(action: {
-//            print("\(title) tapped")
-//        }) {
-//            HStack {
-//                Image(systemName: icon)
-//                    .foregroundColor(.white)
-//                    .imageScale(.large)
-//                    .frame(width: 25, alignment: .leading)
-//                
-//                Text(title)
-//                    .foregroundColor(.white)
-//                    .font(.headline)
-//                
-//                Spacer()
-//            }
-//            .padding()
-//            .frame(maxWidth: .infinity)
-//            .background(Color.gray.opacity(0.2))
-//            .cornerRadius(10)
-//            .padding(.horizontal, 20)
-//        }
-//    }
-//}
-//
-//// MARK: - Preview
-//struct ProfileActionSheetView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ProfileActionSheetView(show: .constant(true))
-//    }
-//}
-
 
 
 
@@ -145,7 +38,7 @@ struct ProfileActionSheetView: View {
                                     show = false
                                 }
                             }) {
-                                Image(systemName: "xmark.circle.fill") // ✅ Close Button
+                                Image(systemName: "xmark.circle.fill") // Close Button
                                     .foregroundColor(.gray)
                                     .imageScale(.large)
                             }
@@ -165,7 +58,7 @@ struct ProfileActionSheetView: View {
                             Button(action: {
                                 rememberMe.toggle()
                             }) {
-                                Image(systemName: rememberMe ? "checkmark.square.fill" : "square") // ✅ Checkbox Style
+                                Image(systemName: rememberMe ? "checkmark.square.fill" : "square") //  Checkbox Style
                                     .foregroundColor(rememberMe ? .red : .white)
                                     .imageScale(.large)
                             }
@@ -182,8 +75,8 @@ struct ProfileActionSheetView: View {
                         Spacer()
                     }
                     .frame(maxWidth: .infinity)
-                    .frame(height: UIScreen.main.bounds.height * 0.35) // ✅ Reduce to 30% of the screen height
-                    .background(Color.black) // ✅ Light grayish background like the image
+                    .frame(height: UIScreen.main.bounds.height * 0.35) //  Reduce to 30% of the screen height
+                    .background(Color.black) //  Light grayish background like the image
                     .cornerRadius(10)
                     .padding(.horizontal, 12)
                     .padding(.bottom, 20)
