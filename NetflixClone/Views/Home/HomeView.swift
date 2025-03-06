@@ -64,7 +64,8 @@ struct HomeView: View {
 
                     VStack(spacing: 10) {
                         Spacer()
-                        CategoryBarView(selectedCategory: $selectedCategory)
+                        CategoryBarView(selectedCategory: $selectedCategory, viewModel: viewModel)
+
                             .padding(.top, 90)
                         
                         headerView()
